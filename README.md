@@ -1,4 +1,4 @@
-# ADSentinel
+﻿# ADSentinel
 
 **ADSentinel** is a cross-platform, terminal-based Active Directory and hybrid-identity security assessment tool for Linux and Windows. It helps authorized security professionals discover AD misconfigurations, analyze privilege-escalation paths, assess AD CS security, evaluate protocol hardening, and generate actionable remediation reports.
 
