@@ -1,5 +1,5 @@
 # Normalized evidence schema
-Evidence is a JSON object containing optional arrays of records. Unknown fields are retained (with recognized secret fields redacted); absent fields are unknown. Boolean indicators must be JSON `true`/`false`, not strings or numbers. Records use an `id` string. The complete synthetic example is `examples/evidence.json`. Evidence represents observations from an approved source; do not fabricate flags from assumptions.
+Evidence is a JSON object containing optional arrays of records. Unknown fields are retained (with recognized secret fields redacted); absent fields are unknown. Boolean indicators must be JSON `true`/`false`, not strings or numbers. Records use an `id` string. The complete synthetic example is the official archive imported with `adsentinel import`. Evidence represents observations from an approved source; do not fabricate flags from assumptions.
 
 Common collections: `users`, `groups`, `computers`, `ous`, `gpos`, `templates`, `trusts`, `dns`, `applications`, `edges`, `replication_rights`, `password_policies`. Supply only metadata, never secret values.
 
@@ -49,3 +49,5 @@ Common collections: `users`, `groups`, `computers`, `ous`, `gpos`, `templates`, 
 Graph risk is a capped sum of edge weights (10 for membership, 30 for other edges), intended for triage. Analysis returns at most 1,000 paths, explores at most 50,000 states and accepts depth 1?12. It fails rather than reporting complete coverage when expansion limits are exceeded.
 
 Finding reports have `schema_version=1.0`, scope, authorization acknowledgement, UTC timestamp, raw evidence reference, coverage, inventory counts, findings and candidate attack paths. Re-render with `adsentinel report --input ...`. Report import is different from normalized evidence import.
+
+Graph imports retain nodes, stable object IDs, relationship evidence pointers and provenance checksums. Unknown edge types are retained but skipped in traversal. Unit-only records live under tests/fixtures and are never presented as collected evidence.

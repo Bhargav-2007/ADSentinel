@@ -220,7 +220,7 @@ def test_redaction_preserves_password_policy_and_hygiene():
 
 
 def test_full_audit_example(tmp_path, monkeypatch):
-    source = Path(__file__).resolve().parents[1] / "examples" / "evidence.json"
+    source = Path(__file__).resolve().parents[1] / "tests" / "fixtures" / "unit-evidence.json"
     evidence = source.read_text()
     monkeypatch.chdir(tmp_path)
     Path("evidence.json").write_text(evidence)

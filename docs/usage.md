@@ -1,26 +1,23 @@
 # Usage
 
-Start offline with synthetic evidence. These commands contact no assessment targets:
+Import and analyze real collector data locally:
+
 ```bash
-adsentinel full-audit --input examples/evidence.json --output results/audit.json
-adsentinel report --input results/audit.json --output results/audit.html
-adsentinel report --input results/audit.json --output results/audit.csv
-adsentinel report --input results/audit.json --output results/audit.md
-adsentinel attack-path --input examples/evidence.json --from jdoe --to "DOMAIN ADMINS" --find-all --max-depth 6
-adsentinel kerberos --input examples/evidence.json --enum --json
-adsentinel recon --domain corp.lab --dc dc01.corp.lab --collect ldap --dry-run
+adsentinel import --source bloodhound-ce --input datasets/public/bloodhound-sample-data/ --output results/imported-graph.json
+adsentinel acl --graph results/imported-graph.json --find-dangerous --output results/acl.json
+adsentinel adcs --graph results/imported-graph.json --find-vulnerable --output results/adcs.json
+adsentinel attack-path --graph results/imported-graph.json --find-shortest --to "DOMAIN ADMINS" --export-graph results/graph.graphml
+adsentinel report --input results/imported-graph.json --format html --output reports/public-dataset-report.html
 ```
 
-Use unique output names: existing evidence and reports are never overwritten. All paths must remain inside the current workspace; traversal and symbolic links are rejected. Raw JSON and final reports are separate. Explicit `.html`, `.md`, `.csv` or `.json` output extensions select that format; otherwise `--format` applies. `--json` prints the full JSON report to stdout, while human output goes to stderr. `--quiet` suppresses summaries and progress; failures remain visible. `--no-color` disables color. `--verbose` adds coverage and collection detail without secrets.
+Import accepts v5/v6 SharpHound JSON, ZIP, gzipped JSON, directories and explicit nodes/edges graphs. Archives are never extracted. Public-data results do not prove live host policy or exploitation.
 
-Explicit live read-only collection:
-```bash
-adsentinel recon --domain corp.lab --dc dc01.corp.lab --user jdoe@corp.lab --collect ldap
-adsentinel azure-ad --collect graph --tenant your-lab-tenant
-```
+Without input, an authorized domain/DC or target selects the command's read-only protocol. --collect overrides this choice. --dry-run prints actions, targets, permissions and limits without prompts, calls or writes. --scope-file enforces dates, hosts, source and route. CIDRs require interactive exact-range confirmation and are limited to explicit scoped hosts.
 
-Provide the LDAP password as `ADS_SENTINEL_PASSWORD` and the Graph access token as `ADS_SENTINEL_GRAPH_TOKEN` through your shell's secure secret mechanism. Do not paste secrets into command history. The Graph token selects the tenant; `--tenant` is a scope label, not authentication or tenant verification. Only Microsoft Graph receives its intended authentication token and GET requests; collected data and reports are never uploaded. Local-only evidence mode does not call Graph.
+LDAP/SMB secrets come from ADS_SENTINEL_PASSWORD or --prompt-password. --anonymous cannot combine with --user. Use --ca-cert and --tls-server-name for private CA trust and a certificate DNS identity when connecting to a DC IP; verification stays enabled. Graph uses an existing ADS_SENTINEL_GRAPH_TOKEN; its token selects the tenant. The current lab scope refuses cloud endpoints.
 
-`--config examples/lab.yaml` supplies domain, DC, username, environment variable names, module selection and output settings. CLI `--authorize` and ownership acknowledgement cannot come from YAML. Collection is sequential; concurrency is bounded at one. No shell commands, remote writes or credential tests are used.
+--read-sysvol --mode network opts into bounded GPO file reads. --check-smb1 adds a negotiation attempt; failure is not proof that SMBv1 is disabled. No write probes or remote commands run.
 
-Selectors such as `--find-vulnerable`, `--find-readers` and `--check-signing` describe intent; each module evaluates all its implemented rules against the available evidence. They do not enable additional network probes. Baseline framework labels are review context, not CIS or Microsoft compliance certification. See the capability matrix before relying on results.
+--json emits machine-readable stdout; human output goes to stderr. --quiet suppresses summaries, not failures; --verbose adds controlled structured events/coverage; --no-color disables color. Extensions select JSON/CSV/Markdown/HTML; otherwise --format applies. Raw evidence and reports are separate, protected, workspace-confined and never overwritten. CSV formulas are neutralized.
+
+YAML supports domain/DC, username/environment names, passive/detection/network mode, full-audit modules, timeout and output formats. Authorization cannot come from YAML. Concurrency is one. Config timeout/port/secret-variable names take precedence in this version. Unsupported selectors fail; absent findings never establish coverage.

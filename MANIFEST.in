@@ -1,0 +1,7 @@
+include LICENSE README.md
+recursive-include adsentinel/reports/templates *.html
+recursive-include docs *.md
+recursive-include scripts *.py
+recursive-include tests *.py *.json
+recursive-include datasets/public *.md *.json *.zip SOURCE-LICENSE
+include examples/lab.yaml

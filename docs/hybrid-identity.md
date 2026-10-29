@@ -1,7 +1,9 @@
-# Microsoft Entra ID and hybrid identity
+# Hybrid identity
 
-Graph inventory uses only GET requests to the fixed Microsoft Graph v1.0 origin. Supply an existing tenant-scoped token; the application never requests consent or write permissions. Typical inventory permissions are User.Read.All and Application.Read.All (subject to tenant policy and endpoint documentation). Do not grant Directory.ReadWrite.All. The tenant option is a human scope label; verify the token tenant independently.
+Graph uses allowlisted GET resources, bounded same-origin v1.0 pagination, verified TLS and no redirects/environment proxies. Supply an existing token; no consent or write permission is requested. Endpoint-specific read permissions may include User.Read.All, Group.Read.All, Application.Read.All, RoleManagement.Read.Directory and Directory.Read.All for delegated-consent inventory. Denial/throttling remains incomplete coverage.
 
-Current collection includes user synchronization indicators, application/service-principal identifiers and application credential expiry metadata. Secret values and key material are discarded. Imported normalized evidence can flag hybrid privileged identities and overprivileged applications, but live effective role assignment, risky consent, MFA posture, Connect configuration, PHS and PTA agents are not assessed. Unknown coverage must be resolved with separate authorized exports.
+Collected data covers users/groups, sync flags, apps/SPs, expiry metadata, direct roles, application grants, delegated consent and organization sync metadata. Secret values/key material are discarded. Sensitive grants trigger review, not a claim that a necessary business permission is excessive. Requested permissions are not treated as granted consent.
 
-References: [Graph permissions](https://learn.microsoft.com/graph/permissions-overview), [paging](https://learn.microsoft.com/graph/paging), [best practices](https://learn.microsoft.com/graph/best-practices-concept). Pagination URLs are checked before the token is sent; redirects and environment proxies are disabled.
+Group roles, PIM, full MFA, Connect/PTA/PHS agents and conditional-access effectiveness are unsupported. A sync flag does not prove PHS. The token determines the tenant; --tenant is a label. The current isolated-lab scope excludes cloud endpoints; no live Graph validation occurred.
+
+References: https://learn.microsoft.com/graph/permissions-overview ; https://learn.microsoft.com/graph/paging ; https://learn.microsoft.com/graph/api/serviceprincipal-list-approleassignments

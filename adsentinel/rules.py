@@ -394,6 +394,11 @@ DANGEROUS = {
 
 
 def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], dict[str, Any]]:
+    from .modules.identity import enrich
+    from .modules.privileged_access import privileged_principals
+
+    enrich(data)
+    privileged = privileged_principals(data)
     findings = []
     coverage: dict[str, Any] = {}
     selected = set(modules)
@@ -409,6 +414,10 @@ def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], d
         if rule.module not in selected:
             continue
         for record in data.get(rule.collection, []):
+            if rule.module == "trusts" and (
+                record.get("within_forest") is True or record.get("trust_type") in {"ParentChild"}
+            ):
+                continue
             if rule.field not in record:
                 continue
             slot = coverage.setdefault(rule.module, {"status": "evaluated", "evaluated_fields": 0})
@@ -423,7 +432,14 @@ def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], d
                     rule.title,
                     rule.severity,
                     str(record.get("id", record.get("name", "unknown"))),
-                    {"collection": rule.collection, "field": rule.field, "value": record[rule.field]},
+                    {
+                        "collection": rule.collection,
+                        "field": rule.field,
+                        "value": record[rule.field],
+                        "evidence_reference": record.get(
+                            "evidence_reference", str(record.get("id", "unknown"))
+                        ),
+                    },
                     rule.mitre,
                     rule.detection,
                     rule.remediation,
@@ -455,28 +471,12 @@ def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], d
         )
 
     if "adcs" in selected:
-        for template in data.get("templates", []):
-            if (
-                template.get("enrollee_supplies_subject") is True
-                and template.get("client_authentication") is True
-                and template.get("low_privilege_enrollment") is True
-                and template.get("manager_approval") is False
-                and template.get("authorized_signatures") == 0
-                and template.get("published") is True
-            ):
-                add(
-                    "ADS-ESC1",
-                    "adcs",
-                    "ESC1 configuration indicators",
-                    "HIGH",
-                    template["id"],
-                    {k: v for k, v in template.items() if k != "id"},
-                    "T1649",
-                    "Disable supplied subject names or restrict enrollment; require approval and review CA policy.",
-                )
+        from .modules.adcs import assess
+
+        findings.extend(assess(data))
     if "acl" in selected:
         for edge in data.get("edges", []):
-            if edge.get("relation") in DANGEROUS:
+            if edge.get("relation") in DANGEROUS and edge.get("source") not in privileged:
                 add(
                     "ADS-ACL",
                     "acl",
@@ -495,7 +495,7 @@ def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], d
                     "ADS-DCSYNC",
                     "dcsync-check",
                     "Replication permission combination reported",
-                    "CRITICAL",
+                    "INFO" if acl["principal"] in privileged else "CRITICAL",
                     acl["principal"],
                     acl,
                     "T1003.006",
@@ -516,7 +516,15 @@ def evaluate(data: dict[str, Any], modules: list[str]) -> tuple[list[Finding], d
                         "T1110",
                         "Review password policy against organizational requirements; favor long passwords and MFA.",
                     )
+    from .modules.identity import assess as assess_identity
+
+    findings.extend(assess_identity(data, list(selected)))
+    # Deduplicate by stable finding identifier; sorting does not depend on input dictionary ordering.
+    findings = list({finding.id: finding for finding in findings}.values())
     for module in modules:
+        if module in {"recon", "bloodhound"} and data.get("nodes"):
+            coverage[module]["status"] = "inventory collected"
+            coverage[module]["object_count"] = len(data["nodes"])
         related = [f for f in findings if f.module == module]
         if related:
             coverage[module]["status"] = "evaluated"

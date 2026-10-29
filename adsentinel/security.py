@@ -144,8 +144,8 @@ def redact(value: Any) -> Any:
 
 def read_json(path: str | Path) -> dict[str, Any]:
     p = safe_path(path)
-    if p.stat().st_size > 25_000_000:
-        raise SafetyError("Evidence exceeds 25 MB limit")
+    if p.stat().st_size > 256_000_000:
+        raise SafetyError("Evidence exceeds 256 MB limit")
     with p.open(encoding="utf-8") as stream:
         data = json.load(stream)
     if not isinstance(data, dict):

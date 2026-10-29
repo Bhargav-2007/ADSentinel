@@ -11,3 +11,4 @@ __pycache__
 *.ccache
 *.kirbi
 *credentials*
+.venv-linux

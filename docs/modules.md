@@ -1,32 +1,32 @@
-# Module capability matrix
+# Capability matrix
 
-Version 0.1 is an evidence-driven assessment implementation with two limited live inventory collectors. It is not a full protocol scanner. Every module command exists; below is the implemented scope. Missing evidence is unknown, not healthy.
+These are actual implementations, with explicit limits. No module is certified complete against a live AD domain yet.
 
-| Command | Implemented assessment | Live data source / limitation |
+| Command | Real implementation | Boundary |
 |---|---|---|
-| recon | Users, groups, computers, OUs, membership and password policy inventory | Verified LDAPS; no SID, NetBIOS, DNS or share inventory yet |
-| bloodhound | Normalized edge preparation and graph JSON export | Not native BloodHound CE/SharpHound output; no sessions or local groups |
-| kerberos | SPN exposure, preauthentication, RC4-only indicators | LDAPS attributes; no ticket requests or cracking |
-| adcs | Compound ESC1 configuration indicators | Imported template settings; no live CA/template ACL parser, ESC8 probe or enrollment |
-| delegation | Unconstrained non-DC delegation and protocol transition | LDAPS; constrained targets and RBCD descriptors not yet parsed |
-| acl | Dangerous supplied control edges | Imported resolved edges; no binary ACL or effective access evaluator |
-| dcsync-check | Combined replication-right indicators | Imported permissions; domain root, deny ACEs, group expansion and filtered sets need manual review |
-| attack-path | Shortest / bounded simple paths, risk score, frequent intermediate nodes, per-edge remediation | Supplied graph; scores are prioritization heuristics |
-| gpo | Low-privilege write indicators | Imported GPO evidence; no SYSVOL/script/task collection |
-| laps | Coverage gaps and excessive readers | Imported metadata; never retrieves passwords |
-| gmsa | Unmanaged service accounts and excessive readers | Imported metadata; never retrieves managed passwords |
-| smb | Signing, SMBv1 and anonymous-share indicators | Imported policy evidence; no SMB negotiation or write probes |
-| ldap | Signing and channel-binding policy indicators | Imported policy evidence; successful LDAPS does not establish signing/CBT policy |
-| ntlm | NTLMv1 acceptance indicators | Imported policy evidence; no relay listener or credential coercion |
-| dns | Insecure updates and unrestricted transfer indicators | Imported evidence; no DNS transfer attempt |
-| rdp | NLA and excessive access indicators | Imported policy evidence; no logon attempts |
-| winrm | Basic authentication over HTTP indicator | Imported policy evidence; no remote execution |
-| trusts | SID filtering disabled indicator | Imported evidence; trust context must be reviewed |
-| azure-ad | App credential expiry, reported overprivilege and hybrid privilege | Graph users/apps/service-principal inventory; roles, MFA, consent and sync-agent policies not collected |
-| account-hygiene | Non-expiring/reversible passwords and reported dormant privilege | LDAPS for account flags; dormancy requires imported evidence |
-| password-policy | Minimum length/history review thresholds | LDAPS domain policy; no fine-grained effective policy resolution |
-| privileged-access | Reported tiering violations | Imported evidence; membership graph supports separate path analysis |
-| baseline | Cross-module configuration review | Not a benchmark compliance engine; framework is a label |
-| detection-coverage | Security auditing and script-block logging gaps | Imported evidence; cannot prove SIEM event receipt |
+| recon | LDAPS RootDSE/domain/config/schema, SID/functional metadata, objects, policies, sites/subnets; DNS when DC is an IP | SMB shares use the SMB collector; no plaintext bind probes |
+| bloodhound | Native directory/ACL graph collection; actual SharpHound import including sessions/local groups | Native SAM/session collection unsupported; internal JSON is not a CE collector ZIP |
+| attack-path | ID-based BFS/DFS, cycle avoidance, low-privilege source selection, high-value targets, JSON/GraphML | Heuristic candidate paths; common intermediates are not whole-graph dominators |
+| kerberos | Actual LDAP SPNs, preauth/UAC, encryption and delegation metadata | Ticket capture, roasting requests and cracking unsupported |
+| adcs | CA/template publication, settings/EKUs/ACLs; ESC1/2/3/4 indicators and conditional ESC1 graph edges | No enrollment/authentication or ESC8/EPA probe; CA trust/authentication remain unvalidated |
+| delegation | UAC, constrained targets, RBCD descriptor metadata and relationships | Conditional ACEs and end-to-end impersonation unsupported |
+| acl | Binary self-relative SDs, owner/DACL, object rights and inheritance filtering | Not a full ordered Windows AccessCheck; token denies/OWNER RIGHTS require review |
+| dcsync-check | Domain-root replication combinations; group paths through graph | Permission indicators only; no credential extraction |
+| gpo | LDAP links/paths/control rights; optional bounded INF/POL/GPP/script metadata | --read-sysvol --mode network required; no effective-host-policy claim |
+| laps | Collected expiration metadata, reported coverage, parsed attribute-read edges | Missing expiration is unknown; never retrieves passwords or infers encryption decryptors |
+| gmsa | Membership descriptor and READ_PROPERTY reader indicators; SPN/service-account review | No password retrieval or complete token access calculation |
+| smb | Real negotiation/signing, optional SMBv1 attempt, one login, share/root listing | No write probes or complete NTFS/share effective ACL evaluation |
+| ldap | Verified TLS and actual directory reads, including anonymous exposure when observed | Live signing/CBT enforcement tests explicitly unsupported |
+| ntlm | Actual SMB relay-relevant signing surface and imported policy evidence | Does not infer NTLMv1 from negotiation; relay validation unsupported |
+| dns | Real A/AAAA/MX/NS/SOA, DC/Kerberos/GC SRV, wildcard query; authorized AXFR | No secure-update or stale-record inference from TTL; no updates |
+| rdp | Actual X.224 TLS-only acceptance or HYBRID-required negotiation | No logons, effective group access or Restricted Admin verification |
+| winrm | Actual WSMan Identify/401/advertised auth; client API supports verified TLS | No commands/effective remoting-access claims; auth header is not proof Basic succeeds |
+| trusts | Actual direction/type/flags and SIDHistory observations | Intra-forest filtering handled separately; no cross-domain access attempts |
+| azure-ad | Read-only Graph inventory, direct roles, application grants, consent, expiry and sync metadata | PIM/group roles, MFA, PHS/PTA host settings unsupported; lab scope excludes cloud |
+| account-hygiene | Actual UAC/enabled/SPN flags; disabled privilege; inactivity with a collection reference time | Old public data is not labeled dormant relative to today |
+| password-policy | Domain/fine-grained length/history/complexity/lockout metadata | No per-account resultant-policy computation |
+| privileged-access | Transitive privileged membership and standing-access inventory | No tiering inference without session/tier evidence |
+| baseline | Cross-module configuration and optional GPO policy review | Microsoft/CIS-inspired review, not compliance certification |
+| detection-coverage | Imported host indicators and actual optional GPO logging/audit metadata | No proof of host effective policy or SIEM receipt; Sysmon/CA probes unsupported |
 
-Normalized evidence is documented in `docs/evidence-schema.md`. Requests for unavailable intrusive modes fail closed after checking authorization; no exploit is run. `--collection` records BloodHound preparation intent and does not invoke a collector executable. Path results do not prove exploitability. Chokepoints are frequency counts among returned paths, not graph-theoretic dominators.
+Sources resolve uniquely; use qualified names/IDs for ambiguity. Destinations may span collected domains. Unknown edges remain exported and are listed as skipped during traversal. Authorization never executes an unavailable backend.

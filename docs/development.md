@@ -1,21 +1,20 @@
-# Development
+# Development and release review
 
-Install editable development dependencies in a virtual environment, then run:
+Use a private virtual environment, install .[dev], then run:
+
 ```bash
 python -m pytest -q
-python -m ruff check adsentinel tests
-python -m ruff format --check adsentinel tests
+python -m ruff check adsentinel tests scripts
+python -m ruff format --check adsentinel tests scripts
 python -m mypy adsentinel
 python -m bandit -r adsentinel -q
-python -m pip_audit
+python -m pip_audit --skip-editable
+python -m build --wheel --sdist
+python scripts/validate_public.py --output results/public-validation.json
 ```
 
-Modules separate safety/file handling, configuration, collectors, normalization, rule evaluation, graph analysis, reporting and CLI orchestration. Add evidence fields and detection rules in `rules.py`, with positive, negative and unknown-evidence tests. Do not add network side effects to rule evaluation. Keep collectors read-only and use mocks in integration tests.
+Tests cover CLI/auth/path/redaction/report behavior, actual binary descriptor and Registry.pol layouts, LDAP attribute shapes, official sample object/ACL preservation and reviewed AD CS cases. Loopback integration uses actual local SMB, DNS, RDP and HTTP sockets; LDAP/Graph also have local mocks. No real assessment target is contacted by the default suite. Live tests are explicitly opt-in and scope-checked.
 
-GitHub Actions checks Python 3.11?3.13 on Linux and Windows, lint, formatting, types, static security analysis, dependencies and secret scanning. Before release require manual code review of authorization gates, collectors, dependency changes, data handling and documentation; run an isolated AD/Entra lab validation and review rendered reports. Repository branch protection and mandatory review settings must be configured by the repository owner; no automatic release job is provided.
+Public sample and large-graph results are documented under validation/. Keep fixture-only records in tests/fixtures; never present them as collected results. No live module is declared complete without native/manual AD lab comparisons and false-positive/negative analysis.
 
-## Local verification
-
-Verified on Windows with Python 3.11: 73 pytest cases, Ruff lint and formatting, mypy, Bandit, and pip-audit in an isolated virtual environment. The audit found no known vulnerabilities after updating the virtual environment's pip/setuptools. ADSentinel itself is an editable local distribution and is not a published vulnerability database package. ldap3 emits two upstream pyasn1 deprecation warnings in mock tests.
-
-The synthetic full audit generated 18 findings; HTML, CSV, Markdown, JSON and terminal rendering are tested. Windows output DACL was inspected as protected owner-only with inheritance. Linux CI is configured but has not been executed in this local Windows session. No live AD/Entra assessment, Docker build or PyInstaller binary test was performed.
+CI checks Linux/Windows Python versions, tests, Ruff, mypy, Bandit, dependency audit, secret scanning, wheel/sdist build and public-data validation. Dependency audit is a separate development operation that contacts vulnerability services with package metadata; runtime never uploads assessment data. Manual code/security review, a real isolated lab test, report review and approval are required before release. Branch protection/manual reviewer settings must be configured by the repository owner. No release/deploy job is provided.

@@ -9,14 +9,14 @@ import json
 from collections import Counter
 from typing import Any
 
-from .models import SEVERITIES
+from ..models import SEVERITIES
 
 
 def render(report: dict[str, Any], fmt: str) -> str:
     rows = sorted(report.get("findings", []), key=lambda f: -SEVERITIES[f["severity"]])
     counts = dict(Counter(f["severity"] for f in rows))
     if fmt == "json":
-        return json.dumps({**report, "findings": rows}, indent=2, ensure_ascii=True)
+        return json.dumps({**report, "findings": rows}, indent=2, ensure_ascii=True, default=str)
     if fmt == "csv":
         stream = io.StringIO(newline="")
         writer = csv.writer(stream)
@@ -102,42 +102,11 @@ def render(report: dict[str, Any], fmt: str) -> str:
         lines.extend(f"{i}. [{f['severity']}] {clean(f['remediation'])}" for i, f in enumerate(rows, 1))
         return "\n".join(lines) + "\n"
     if fmt == "html":
+        from jinja2 import Environment, PackageLoader, select_autoescape
 
-        def esc(value: Any) -> str:
-            return html.escape(str(value))
-
-        sections = []
-        for f in rows:
-            sections.append(
-                "<article><h3>"
-                + esc(f["severity"] + " ? " + f["title"])
-                + "</h3>"
-                + "".join(
-                    "<p><strong>" + esc(k) + ":</strong> " + esc(v) + "</p>"
-                    for k, v in f.items()
-                    if k not in {"title", "severity"}
-                )
-                + "</article>"
-            )
-        return (
-            "<!doctype html><html lang='en'><meta charset='utf-8'>"
-            "<meta name='viewport' content='width=device-width,initial-scale=1'>"
-            """<meta http-equiv='Content-Security-Policy' content="default-src 'none'; style-src 'unsafe-inline'">"""
-            "<title>ADSentinel assessment</title><style>body{font:16px system-ui;max-width:1000px;"
-            "margin:3rem auto;padding:0 1rem;color:#193046}article{border-left:4px solid #357;"
-            "padding:1rem;background:#f3f6f9;margin:1rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}"
-            "h1,h2{color:#123}</style><h1>ADSentinel assessment</h1><h2>Executive summary</h2><p>"
-            + esc(f"{len(rows)} findings; {counts}")
-            + ". No findings does not establish security.</p><h2>Scope and authorization</h2><pre>"
-            + esc(json.dumps({k: report.get(k) for k in ("timestamp", "scope", "authorization")}, indent=2))
-            + "</pre><h2>Coverage and limitations</h2><pre>"
-            + esc(json.dumps(report.get("coverage"), indent=2))
-            + "</pre><h2>Findings</h2>"
-            + "".join(sections)
-            + "<h2>Attack-path references</h2><pre>"
-            + esc(json.dumps(report.get("attack_paths", {}), indent=2))
-            + "</pre><h2>Prioritized remediation roadmap</h2><ol>"
-            + "".join("<li>" + esc(f["severity"] + ": " + f["remediation"]) + "</li>" for f in rows)
-            + "</ol></html>"
+        environment = Environment(
+            loader=PackageLoader("adsentinel.reports", "templates"),
+            autoescape=select_autoescape(["html", "xml"]),
         )
+        return environment.get_template("assessment.html").render(report=report, findings=rows, counts=counts)
     raise ValueError("Unsupported report format")

@@ -38,8 +38,8 @@ def load_config(path: str) -> dict[str, Any]:
         raise SafetyError("Authorization requirements cannot be disabled")
     if any(safety.get(key, False) is not False for key in safety if key.startswith("allow_")):
         raise SafetyError("Intrusive operations cannot be enabled in configuration")
-    if data.get("scan", {}).get("mode", "passive") != "passive":
-        raise SafetyError("Only passive mode is supported by configuration")
+    if data.get("scan", {}).get("mode", "passive") not in {"passive", "detection", "network"}:
+        raise SafetyError("Only passive, detection and network modes may be selected in configuration")
     auth = data.get("authentication", {})
     if auth.get("kerberos", False) or auth.get("hashes", False):
         raise SafetyError("Kerberos and hash authentication are not implemented")

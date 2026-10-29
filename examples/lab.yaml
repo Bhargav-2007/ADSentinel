@@ -1,18 +1,19 @@
+# Documentation example; actual engagement scope belongs under ignored results/authorization/.
 target:
-  domain: corp.lab
-  domain_controller: dc01.corp.lab
+  domain: corp.example
+  domain_controller: dc01.corp.example
   ldap_port: 389
   ldaps_port: 636
-  entra_tenant: your-lab-tenant
+  entra_tenant: example-tenant
 authentication:
-  username: jdoe@corp.lab
+  username: reader@corp.example
   password_env: ADS_SENTINEL_PASSWORD
   graph_token_env: ADS_SENTINEL_GRAPH_TOKEN
   kerberos: false
   hashes: false
 scan:
   mode: passive
-  modules: [recon, kerberos, adcs, delegation, acl, dcsync-check, gpo, laps, gmsa, smb, ldap, ntlm, dns, rdp, winrm, trusts, azure-ad, account-hygiene, password-policy, privileged-access, baseline, detection-coverage]
+  modules: [recon, kerberos, adcs, delegation, acl, dcsync-check, gpo, laps, gmsa, trusts, account-hygiene, password-policy, privileged-access, baseline, detection-coverage]
 output:
   directory: results
   formats: [json, markdown, html]

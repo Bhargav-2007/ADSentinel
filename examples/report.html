@@ -1,190 +1,746 @@
-<!doctype html><html lang='en'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta http-equiv='Content-Security-Policy' content="default-src 'none'; style-src 'unsafe-inline'"><title>ADSentinel assessment</title><style>body{font:16px system-ui;max-width:1000px;margin:3rem auto;padding:0 1rem;color:#193046}article{border-left:4px solid #357;padding:1rem;background:#f3f6f9;margin:1rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}h1,h2{color:#123}</style><h1>ADSentinel assessment</h1><h2>Executive summary</h2><p>18 findings; {&#x27;CRITICAL&#x27;: 1, &#x27;HIGH&#x27;: 9, &#x27;MEDIUM&#x27;: 8}. No findings does not establish security.</p><h2>Scope and authorization</h2><pre>{
-  &quot;timestamp&quot;: &quot;2026-10-29T10:09:50.212340+00:00&quot;,
-  &quot;scope&quot;: {
-    &quot;domain&quot;: null,
-    &quot;dc&quot;: null,
-    &quot;target&quot;: null,
-    &quot;tenant_label&quot;: null
+﻿<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'">
+<title>ADSentinel | Identity Security Assessment</title>
+<style>
+:root{color-scheme:light;--navy:#102b46;--muted:#52687a;--line:#d9e2eb}*{box-sizing:border-box}body{margin:0;background:#edf2f7;color:#20364c;font:15px/1.6 system-ui,sans-serif}main{max-width:1140px;margin:auto;background:white;padding:48px}header{border-top:7px solid #1aa7a1;padding:20px 0 32px;border-bottom:1px solid var(--line)}.brand{letter-spacing:.2em;font-weight:800;font-size:14px;color:#087c79}h1{font-size:34px;line-height:1.2;color:var(--navy);margin:16px 0}h2{margin-top:40px;color:var(--navy);font-size:23px}h3{font-size:18px;margin:0 0 8px}.muted{color:var(--muted)}.cards{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.card{background:#f3f7fa;border:1px solid var(--line);padding:16px 22px;min-width:130px}.card strong{display:block;font-size:28px;color:var(--navy)}table{border-collapse:collapse;width:100%;margin:20px 0}td,th{padding:10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f0f5f9}article{border:1px solid var(--line);border-left:5px solid #49718e;margin:20px 0;padding:22px;break-inside:avoid}.HIGH{border-left-color:#cb663a}.CRITICAL{border-left-color:#ac2341}.MEDIUM{border-left-color:#bb9220}.tag{font-size:12px;font-weight:800;letter-spacing:.05em}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f7fa;padding:16px;font:12px/1.5 ui-monospace,monospace}details summary{cursor:pointer;font-weight:600}.object,code{overflow-wrap:anywhere}footer{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:12px}.notice{border:1px solid #dac37a;background:#fffbeb;padding:14px}a{color:#087c79}@media print{body{background:white}main{padding:15mm;max-width:none}details>pre{display:block}header{break-after:avoid}}@media(max-width:700px){main{padding:20px}h1{font-size:27px}table{font-size:12px}}
+</style></head><body><main>
+<header><div class="brand">ADSENTINEL / ASSESSMENT REPORT</div><h1>Identity Security Assessment</h1><p class="muted">Authorized Active Directory attack-path discovery, privilege-escalation assessment, and remediation reporting.</p><p>2026-10-29T11:02:01.866028+00:00 · ADSentinel 0.2.0</p></header>
+<h2>Executive summary</h2><p>The assessment identified <strong>17 findings</strong> from the available evidence. Findings describe observed configuration and candidate access paths; they do not establish exploitation.</p>
+<div class="cards"><div class="card"><strong>0</strong>CRITICAL</div><div class="card"><strong>17</strong>HIGH</div><div class="card"><strong>0</strong>MEDIUM</div><div class="card"><strong>0</strong>LOW</div><div class="card"><strong>0</strong>INFO</div></div>
+<p class="notice">No findings does not establish security. Review unknown controls, collection errors, evidence dates, and manual validation requirements before acting.</p>
+<h2>Scope and authorization</h2><details open><summary>Assessment metadata</summary><pre>{
+  "authorization": {
+    "authorize": false,
+    "mode": "read-only evidence assessment",
+    "ownership_acknowledged": false,
+    "reference": "Not supplied",
+    "scope_reference": null
   },
-  &quot;authorization&quot;: {
-    &quot;authorize&quot;: false,
-    &quot;ownership_acknowledged&quot;: false,
-    &quot;reference&quot;: &quot;Not supplied&quot;,
-    &quot;mode&quot;: &quot;read-only evidence assessment&quot;
+  "inventory": {
+    "aiacas": 6,
+    "cas": 4,
+    "computers": 34,
+    "containers": 939,
+    "domains": 3,
+    "edges": 12521,
+    "gpos": 32,
+    "groups": 219,
+    "nodes": 1478,
+    "ntauthstores": 2,
+    "ous": 20,
+    "replication_rights": 15,
+    "rootcas": 5,
+    "templates": 106,
+    "trusts": 6,
+    "users": 99
+  },
+  "raw_evidence_reference": "datasets/public/bloodhound-sample-data/ad_sampledata.zip",
+  "scope": {
+    "dataset_sha256": "d32eb854bfaa1610078681c508a0ff7f2567f089eb9de00429a1cc951bf0b96e",
+    "domains": [
+      "PHANTOM.CORP",
+      "GHOST.CORP",
+      "WRAITH.CORP"
+    ],
+    "source": "Official SpecterOps BloodHound CE Active Directory sample",
+    "validation_type": "public collector-data analysis; no live assessment"
   }
-}</pre><h2>Coverage and limitations</h2><pre>{
-  &quot;recon&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+}</pre></details>
+<h2>Coverage and limitations</h2><table><thead><tr><th>Module</th><th>Coverage status</th><th>Findings</th></tr></thead><tbody><tr><td>adcs</td><td>evaluated</td><td>17</td></tr></tbody></table>
+<details open><summary>Collection errors</summary><pre>[
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305110018_computers.json"
   },
-  &quot;bloodhound&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json"
   },
-  &quot;kerberos&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 3,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 3
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/80"
   },
-  &quot;adcs&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/81"
   },
-  &quot;delegation&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/82"
   },
-  &quot;acl&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/83"
   },
-  &quot;dcsync-check&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/84"
   },
-  &quot;attack-path&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/85"
   },
-  &quot;gpo&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/86"
   },
-  &quot;laps&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/87"
   },
-  &quot;gmsa&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/88"
   },
-  &quot;smb&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/89"
   },
-  &quot;ldap&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/90"
   },
-  &quot;ntlm&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/91"
   },
-  &quot;dns&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/92"
   },
-  &quot;rdp&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/93"
   },
-  &quot;winrm&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/94"
   },
-  &quot;trusts&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/95"
   },
-  &quot;azure-ad&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/96"
   },
-  &quot;account-hygiene&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 1,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 1
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/97"
   },
-  &quot;password-policy&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 2
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/98"
   },
-  &quot;privileged-access&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/100"
   },
-  &quot;baseline&quot;: {
-    &quot;status&quot;: &quot;no applicable evidence&quot;,
-    &quot;evaluated_fields&quot;: 0,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 0
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/101"
   },
-  &quot;detection-coverage&quot;: {
-    &quot;status&quot;: &quot;evaluated&quot;,
-    &quot;evaluated_fields&quot;: 2,
-    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
-    &quot;finding_count&quot;: 2
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/102"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/105"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/106"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/107"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/108"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/109"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_groups.json#/data/111"
+  },
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305110018_users.json"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110018_users.json#/data/49"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_containers.json#/data/33"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_containers.json#/data/34"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/45"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/46"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/47"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/51"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/53"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/54"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/55"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305110427_groups.json#/data/57"
+  },
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305110427_users.json"
+  },
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305111414_computers.json"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/80"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/81"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/82"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/83"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/84"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/85"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/86"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/87"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/88"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/89"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/90"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/91"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/92"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/93"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/94"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/95"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/97"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/98"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/99"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/100"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/101"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/102"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/103"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/104"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/105"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/106"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/107"
+  },
+  {
+    "reason": "duplicate differs; relationship arrays merged, first conflicting scalar retained",
+    "reference": "ad_sampledata.zip!20240305111414_groups.json#/data/108"
+  },
+  {
+    "reason": "declared count differs from record count",
+    "reference": "ad_sampledata.zip!20240305111414_users.json"
   }
-}</pre><h2>Findings</h2><article><h3>CRITICAL ? Replication permission combination reported</h3><p><strong>id:</strong> ADS-DCSYNC</p><p><strong>module:</strong> dcsync-check</p><p><strong>affected_object:</strong> svc_backup</p><p><strong>evidence:</strong> {&#x27;principal&#x27;: &#x27;svc_backup&#x27;, &#x27;rights&#x27;: [&#x27;DS-Replication-Get-Changes&#x27;, &#x27;DS-Replication-Get-Changes-All&#x27;]}</p><p><strong>mitre:</strong> T1003.006</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Verify domain-root scope, group expansion, deny ACEs and filtered-set requirements; restrict replication rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Kerberos preauthentication disabled</h3><p><strong>id:</strong> ADS-001</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> jdoe</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;preauth_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1558.004</p><p><strong>detection:</strong> Review events 4768 and 4738.</p><p><strong>remediation:</strong> Require Kerberos preauthentication after compatibility review.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? RC4-only Kerberos account</h3><p><strong>id:</strong> ADS-003</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;rc4_only&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1558.003</p><p><strong>detection:</strong> Review encryption types in event 4769.</p><p><strong>remediation:</strong> Enable AES and rotate service credentials after compatibility testing.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? SMB signing not required</h3><p><strong>id:</strong> ADS-011</p><p><strong>module:</strong> smb</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;smb_signing_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1557.001</p><p><strong>detection:</strong> Review SMB server audit logs and relay-related logons.</p><p><strong>remediation:</strong> Require SMB signing through a tested policy rollout.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Insecure DNS dynamic updates</h3><p><strong>id:</strong> ADS-017</p><p><strong>module:</strong> dns</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;dns&#x27;, &#x27;field&#x27;: &#x27;insecure_dynamic_updates&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1557</p><p><strong>detection:</strong> Monitor DNS record changes and server audit logs.</p><p><strong>remediation:</strong> Require secure dynamic updates and review DNS ACLs.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? SID filtering disabled on a trust</h3><p><strong>id:</strong> ADS-022</p><p><strong>module:</strong> trusts</p><p><strong>affected_object:</strong> legacy.lab</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;trusts&#x27;, &#x27;field&#x27;: &#x27;sid_filtering&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1134.005</p><p><strong>detection:</strong> Monitor trust changes and SIDHistory modifications.</p><p><strong>remediation:</strong> Review trust type and enforce appropriate SID filtering.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Security auditing disabled</h3><p><strong>id:</strong> ADS-029</p><p><strong>module:</strong> detection-coverage</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;security_auditing&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1562.002</p><p><strong>detection:</strong> Monitor 4719 audit-policy changes and log gaps.</p><p><strong>remediation:</strong> Apply advanced audit policy and validate SIEM forwarding.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Overprivileged application reported</h3><p><strong>id:</strong> ADS-031</p><p><strong>module:</strong> azure-ad</p><p><strong>affected_object:</strong> lab-app</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;applications&#x27;, &#x27;field&#x27;: &#x27;overprivileged&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1098.003</p><p><strong>detection:</strong> Monitor app role assignment and consent audit events.</p><p><strong>remediation:</strong> Review consent grants and remove unnecessary permissions.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Potential directory control edge</h3><p><strong>id:</strong> ADS-ACL</p><p><strong>module:</strong> acl</p><p><strong>affected_object:</strong> DOMAIN ADMINS</p><p><strong>evidence:</strong> {&#x27;source&#x27;: &#x27;Helpdesk&#x27;, &#x27;target&#x27;: &#x27;DOMAIN ADMINS&#x27;, &#x27;relation&#x27;: &#x27;GenericAll&#x27;}</p><p><strong>mitre:</strong> T1098</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review inheritance, deny ACEs and effective access; remove excessive rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? ESC1 configuration indicators</h3><p><strong>id:</strong> ADS-ESC1</p><p><strong>module:</strong> adcs</p><p><strong>affected_object:</strong> LabTemplate</p><p><strong>evidence:</strong> {&#x27;enrollee_supplies_subject&#x27;: True, &#x27;client_authentication&#x27;: True, &#x27;low_privilege_enrollment&#x27;: True, &#x27;manager_approval&#x27;: False, &#x27;authorized_signatures&#x27;: 0, &#x27;published&#x27;: True}</p><p><strong>mitre:</strong> T1649</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Disable supplied subject names or restrict enrollment; require approval and review CA policy.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Service principal eligible for service-ticket requests</h3><p><strong>id:</strong> ADS-002</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;has_spn&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1558.003</p><p><strong>detection:</strong> Review anomalous 4769 service-ticket requests.</p><p><strong>remediation:</strong> Use gMSAs and long unique service passwords; prefer AES.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? LAPS coverage gap</h3><p><strong>id:</strong> ADS-007</p><p><strong>module:</strong> laps</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;laps_enabled&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1078.003</p><p><strong>detection:</strong> Monitor LAPS operational logs and directory access.</p><p><strong>remediation:</strong> Deploy Windows LAPS and restrict password-read rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Unmanaged service account</h3><p><strong>id:</strong> ADS-010</p><p><strong>module:</strong> gmsa</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;manual_service_account&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1078.002</p><p><strong>detection:</strong> Review service logons and service-account changes.</p><p><strong>remediation:</strong> Migrate eligible services to gMSAs.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? RDP NLA not required</h3><p><strong>id:</strong> ADS-019</p><p><strong>module:</strong> rdp</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;nla_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1021.001</p><p><strong>detection:</strong> Review 4624 type 10 and TerminalServices logs.</p><p><strong>remediation:</strong> Require NLA and restrict RDP access.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Account password never expires</h3><p><strong>id:</strong> ADS-023</p><p><strong>module:</strong> account-hygiene</p><p><strong>affected_object:</strong> jdoe</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;password_never_expires&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1078.002</p><p><strong>detection:</strong> Monitor userAccountControl changes and account use.</p><p><strong>remediation:</strong> Review account purpose and adopt managed service identities.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? PowerShell script-block logging disabled</h3><p><strong>id:</strong> ADS-028</p><p><strong>module:</strong> detection-coverage</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;script_block_logging&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1059.001</p><p><strong>detection:</strong> Verify receipt of PowerShell event 4104.</p><p><strong>remediation:</strong> Enable script-block logging and forward events securely.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Password policy review needed: history_length</h3><p><strong>id:</strong> ADS-POLICY-history_length</p><p><strong>module:</strong> password-policy</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;history_length&#x27;: 10}</p><p><strong>mitre:</strong> T1110</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review password policy against organizational requirements; favor long passwords and MFA.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Password policy review needed: minimum_length</h3><p><strong>id:</strong> ADS-POLICY-minimum_length</p><p><strong>module:</strong> password-policy</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;minimum_length&#x27;: 8}</p><p><strong>mitre:</strong> T1110</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review password policy against organizational requirements; favor long passwords and MFA.</p><p><strong>confidence:</strong> configuration indicator</p></article><h2>Attack-path references</h2><pre>{
-  &quot;source&quot;: &quot;jdoe&quot;,
-  &quot;target&quot;: &quot;DOMAIN ADMINS&quot;,
-  &quot;paths&quot;: [
+]</pre></details>
+<h2>Prioritized findings</h2><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-21541ac5dc4fd134</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 9275983F-71C8-48F6-9EF3-E655E618930E</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/37",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "9275983F-71C8-48F6-9EF3-E655E618930E",
+  "template_name": "SPICYTEMP@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/37</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-362caa95798e73be</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> B42CDCB9-3FD3-4D63-B80B-18C458F47351</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/41",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "B42CDCB9-3FD3-4D63-B80B-18C458F47351",
+  "template_name": "SPICYTEMP(COPY))@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/41</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-a6a4f22b3a7a7bc1</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 8482B82C-4103-43BA-B530-409A2C763965</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.4.1.311.20.2.2"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/33",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9",
+    "CEC2A22A-AF46-4DC5-A942-26514BD8AE94"
+  ],
+  "template": "8482B82C-4103-43BA-B530-409A2C763965",
+  "template_name": "ESC1SMARTCARD@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/33</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-a8545439e7d2142b</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> E6D45561-4944-48A4-BEC4-24B47A74028B</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.5.5.7.3.1",
+    "1.3.6.1.5.5.7.3.2"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/40",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "E6D45561-4944-48A4-BEC4-24B47A74028B",
+  "template_name": "OPERATIONSMANAGER@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/40</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-b4f9613994fb0e20</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> B31F77C1-D322-4D31-BD14-70C915C90E2E</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/38",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "B31F77C1-D322-4D31-BD14-70C915C90E2E",
+  "template_name": "SPICYTEMP(COPY)@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/38</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-be80155361975816</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 2976DCBD-6740-45A8-8724-0CE6F2512632</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.5.5.7.3.2"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/28",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "2976DCBD-6740-45A8-8724-0CE6F2512632",
+  "template_name": "TESTV3@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/28</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC1-dc1df50f93a286b5</div><h3>Published template allows broad enrollment, supplied subject and client authentication</h3><p>ESC1 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> D8AFC3B5-D46E-4B07-BDE3-525E51CCCD6B</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.5.5.7.3.2"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/53",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "D8AFC3B5-D46E-4B07-BDE3-525E51CCCD6B",
+  "template_name": "MYTEMPLATE@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/53</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC2-3e1a728f5659365c</div><h3>Published broad-enrollment template has Any Purpose or no EKU restriction</h3><p>ESC2 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> B31F77C1-D322-4D31-BD14-70C915C90E2E</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/38",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "B31F77C1-D322-4D31-BD14-70C915C90E2E",
+  "template_name": "SPICYTEMP(COPY)@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/38</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC2-642c750b8c7724f5</div><h3>Published broad-enrollment template has Any Purpose or no EKU restriction</h3><p>ESC2 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> B42CDCB9-3FD3-4D63-B80B-18C458F47351</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/41",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "B42CDCB9-3FD3-4D63-B80B-18C458F47351",
+  "template_name": "SPICYTEMP(COPY))@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/41</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC2-67e54a5b9cbecce3</div><h3>Published broad-enrollment template has Any Purpose or no EKU restriction</h3><p>ESC2 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 93174DE2-D0EC-4E5E-9A67-F2EBBA449EE1</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/32",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "93174DE2-D0EC-4E5E-9A67-F2EBBA449EE1",
+  "template_name": "ESC3-SELF@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/32</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC2-bf8e751a952799e9</div><h3>Published broad-enrollment template has Any Purpose or no EKU restriction</h3><p>ESC2 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 9275983F-71C8-48F6-9EF3-E655E618930E</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "2.5.29.37.0"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/37",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "9275983F-71C8-48F6-9EF3-E655E618930E",
+  "template_name": "SPICYTEMP@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/37</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC3-2c3b0f6e6af11b70</div><h3>Broad enrollment in a certificate-request-agent template</h3><p>ESC3 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> A657240A-E688-458E-81AE-22E243F64F76</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.4.1.311.20.2.1"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/3",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "A657240A-E688-458E-81AE-22E243F64F76",
+  "template_name": "ENROLLMENTAGENT@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/3</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC3-4dee990427caa08a</div><h3>Broad enrollment in a certificate-request-agent template</h3><p>ESC3 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 1906D300-A802-4ADF-A2D5-0F63F03E7B9F</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.4.1.311.20.2.1"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/47",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "1906D300-A802-4ADF-A2D5-0F63F03E7B9F",
+  "template_name": "ENROLLMENTAGENTV2@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/47</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC3-66b9903a6dcaab7d</div><h3>Broad enrollment in a certificate-request-agent template</h3><p>ESC3 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> B23F311A-E473-41D9-B68D-7D01D06C94E1</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.4.1.311.10.3.7",
+    "1.3.6.1.4.1.311.64.1.1",
+    "1.3.6.1.4.1.311.10.3.13",
+    "1.3.6.1.4.1.311.76.8.1",
+    "1.3.6.1.4.1.311.10.3.2",
+    "1.3.6.1.4.1.311.10.3.1",
+    "1.3.6.1.5.5.7.3.3",
+    "1.3.6.1.5.5.7.3.9",
+    "1.3.6.1.4.1.311.20.1",
+    "2.23.133.8.2",
+    "1.3.6.1.4.1.311.20.2.1",
+    "1.3.6.1.4.1.311.10.3.27",
+    "1.3.6.1.4.1.311.10.5.1",
+    "1.3.6.1.4.1.311.21.5",
+    "1.3.6.1.4.1.311.21.19",
+    "1.3.6.1.4.1.311.10.3.22",
+    "1.3.6.1.4.1.311.80.1",
+    "1.3.6.1.4.1.311.10.3.24",
+    "1.3.6.1.4.1.311.10.3.12",
+    "1.3.6.1.4.1.311.10.3.10",
+    "1.3.6.1.4.1.311.10.3.21",
+    "1.3.6.1.4.1.311.10.3.19",
+    "1.3.6.1.4.1.311.10.3.30",
+    "1.3.6.1.4.1.311.10.3.9",
+    "1.3.6.1.5.5.7.3.5",
+    "1.3.6.1.5.5.7.3.4",
+    "1.3.6.1.4.1.311.61.5.1",
+    "1.3.6.1.5.5.7.3.1",
+    "1.3.6.1.4.1.311.10.3.4",
+    "1.3.6.1.4.1.311.2.6.2",
+    "2.23.133.8.1",
+    "1.3.6.1.4.1.311.2.6.1",
+    "1.3.6.1.4.1.311.10.3.4.1",
+    "1.3.6.1.5.5.7.3.8",
+    "1.3.6.1.4.1.311.76.5.1",
+    "1.3.6.1.4.1.311.10.3.5.1",
+    "1.3.6.1.4.1.311.10.6.2",
+    "1.3.6.1.4.1.311.10.3.39",
+    "1.3.6.1.5.5.8.2.2",
+    "1.3.6.1.4.1.311.10.3.5",
+    "1.3.6.1.5.5.7.3.6",
+    "1.3.6.1.4.1.311.10.3.20",
+    "1.3.6.1.4.1.311.10.3.8",
+    "1.3.6.1.5.5.7.3.7",
+    "1.3.6.1.5.2.3.5",
+    "1.3.6.1.4.1.311.10.6.1",
+    "1.3.6.1.4.1.311.76.3.1",
+    "2.23.133.8.3",
+    "1.3.6.1.4.1.311.10.3.26",
+    "1.3.6.1.4.1.311.61.1.1",
+    "1.3.6.1.4.1.311.10.3.23",
+    "1.3.6.1.4.1.311.61.4.1",
+    "1.3.6.1.4.1.311.10.3.6",
+    "1.3.6.1.4.1.311.21.6",
+    "1.3.6.1.4.1.311.10.3.25",
+    "1.3.6.1.4.1.311.10.3.11",
+    "1.3.6.1.4.1.311.76.6.1"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/51",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "B23F311A-E473-41D9-B68D-7D01D06C94E1",
+  "template_name": "CLIENTAUTH3@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/51</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC3-b3de670a0b3e9ca8</div><h3>Broad enrollment in a certificate-request-agent template</h3><p>ESC3 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> CFC802B8-9B37-4D62-9431-8031E4FBAE0A</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [],
+  "ekus": [
+    "1.3.6.1.5.5.7.3.2",
+    "1.3.6.1.4.1.311.20.2.1"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/43",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "CFC802B8-9B37-4D62-9431-8031E4FBAE0A",
+  "template_name": "ESC3-SELF2@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/43</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC4-671d115ce9a5dc4a</div><h3>Broad principal controls a published certificate template</h3><p>ESC4 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> EB0B35D3-6895-443F-B582-09C971344575</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 0,
+  "control_edges": [
     {
-      &quot;edges&quot;: [
-        {
-          &quot;source&quot;: &quot;jdoe&quot;,
-          &quot;target&quot;: &quot;Helpdesk&quot;,
-          &quot;relation&quot;: &quot;MemberOf&quot;
-        },
-        {
-          &quot;source&quot;: &quot;Helpdesk&quot;,
-          &quot;target&quot;: &quot;DOMAIN ADMINS&quot;,
-          &quot;relation&quot;: &quot;GenericAll&quot;
-        }
-      ],
-      &quot;risk_score&quot;: 40,
-      &quot;remediation&quot;: [
-        &quot;Review and restrict MemberOf from jdoe to Helpdesk&quot;,
-        &quot;Review and restrict GenericAll from Helpdesk to DOMAIN ADMINS&quot;
-      ]
+      "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/10/Aces",
+      "inherited": false,
+      "relation": "WritePKIEnrollmentFlag",
+      "source": "S-1-5-21-2697957641-2271029196-387917394-513",
+      "source_kind": "acl",
+      "target": "EB0B35D3-6895-443F-B582-09C971344575"
     }
   ],
-  &quot;chokepoints&quot;: {
-    &quot;Helpdesk&quot;: 1
-  },
-  &quot;path_limit&quot;: 1000,
-  &quot;truncated&quot;: false,
-  &quot;interpretation&quot;: &quot;Candidate paths from supplied relationships; effective access requires review.&quot;
-}</pre><h2>Prioritized remediation roadmap</h2><ol><li>CRITICAL: Verify domain-root scope, group expansion, deny ACEs and filtered-set requirements; restrict replication rights.</li><li>HIGH: Require Kerberos preauthentication after compatibility review.</li><li>HIGH: Enable AES and rotate service credentials after compatibility testing.</li><li>HIGH: Require SMB signing through a tested policy rollout.</li><li>HIGH: Require secure dynamic updates and review DNS ACLs.</li><li>HIGH: Review trust type and enforce appropriate SID filtering.</li><li>HIGH: Apply advanced audit policy and validate SIEM forwarding.</li><li>HIGH: Review consent grants and remove unnecessary permissions.</li><li>HIGH: Review inheritance, deny ACEs and effective access; remove excessive rights.</li><li>HIGH: Disable supplied subject names or restrict enrollment; require approval and review CA policy.</li><li>MEDIUM: Use gMSAs and long unique service passwords; prefer AES.</li><li>MEDIUM: Deploy Windows LAPS and restrict password-read rights.</li><li>MEDIUM: Migrate eligible services to gMSAs.</li><li>MEDIUM: Require NLA and restrict RDP access.</li><li>MEDIUM: Review account purpose and adopt managed service identities.</li><li>MEDIUM: Enable script-block logging and forward events securely.</li><li>MEDIUM: Review password policy against organizational requirements; favor long passwords and MFA.</li><li>MEDIUM: Review password policy against organizational requirements; favor long passwords and MFA.</li></ol></html>
+  "ekus": [
+    "1.3.6.1.5.5.7.3.2",
+    "1.3.6.1.5.5.7.3.1"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-9",
+    "S-1-5-21-2697957641-2271029196-387917394-498",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-516",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/10",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9",
+    "CEC2A22A-AF46-4DC5-A942-26514BD8AE94"
+  ],
+  "template": "EB0B35D3-6895-443F-B582-09C971344575",
+  "template_name": "DOMAINCONTROLLER@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/10</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article><article class="HIGH"><div class="tag">HIGH / ADS-ESC4-8f8ac5c35a86c7a9</div><h3>Broad principal controls a published certificate template</h3><p>ESC4 template-side conditions are present. This does not prove end-to-end impersonation.</p><p class="object"><strong>Affected object:</strong> 96B6A107-47FD-4A98-B183-B6EFCD9E4467</p><p><strong>Confidence:</strong> configuration indicator; CA policy, trust and authentication validation still required</p><p><strong>MITRE ATT&amp;CK:</strong> T1649</p><p><strong>Detection:</strong> Monitor CA issuance 4886/4887 and template changes 5136; correlate requester and subject identities.</p><p><strong>Remediation:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate.</p><details><summary>Evidence and references</summary><pre>{
+  "authorized_signatures": 1,
+  "control_edges": [
+    {
+      "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/54/Aces",
+      "inherited": false,
+      "relation": "WritePKINameFlag",
+      "source": "S-1-5-21-2697957641-2271029196-387917394-513",
+      "source_kind": "acl",
+      "target": "96B6A107-47FD-4A98-B183-B6EFCD9E4467"
+    }
+  ],
+  "ekus": [
+    "1.3.6.1.4.1.311.10.3.12"
+  ],
+  "enrollees": [
+    "PHANTOM.CORP-S-1-5-11",
+    "S-1-5-21-2697957641-2271029196-387917394-2148",
+    "S-1-5-21-2697957641-2271029196-387917394-2173",
+    "S-1-5-21-2697957641-2271029196-387917394-512",
+    "S-1-5-21-2697957641-2271029196-387917394-519"
+  ],
+  "evidence_reference": "ad_sampledata.zip!20240305110018_certtemplates.json#/data/54",
+  "manager_approval": false,
+  "published_cas": [
+    "CDCA8CA4-69D6-4488-87AE-F8F507D53DB9"
+  ],
+  "template": "96B6A107-47FD-4A98-B183-B6EFCD9E4467",
+  "template_name": "ABUSABLETEMPLATE@PHANTOM.CORP"
+}</pre><p>ad_sampledata.zip!20240305110018_certtemplates.json#/data/54</p><p>https://specterops.io/blog/2024/01/24/adcs-attack-paths-in-bloodhound-part-1/</p></details></article>
+<h2>Attack-path analysis</h2><article><h3>SVC_PAYADMIN@PHANTOM.CORP → DOMAIN ADMINS@PHANTOM.CORP</h3><p>Prioritization score: 30/100</p><ol><li class="object">S-1-5-21-2697957641-2271029196-387917394-2117 — <strong>AddMember</strong> → S-1-5-21-2697957641-2271029196-387917394-512</li></ol><p>Review and restrict AddMember from S-1-5-21-2697957641-2271029196-387917394-2117 to S-1-5-21-2697957641-2271029196-387917394-512</p></article>
+<h2>Prioritized remediation roadmap</h2><ol><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-21541ac5dc4fd134)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-362caa95798e73be)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-a6a4f22b3a7a7bc1)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-a8545439e7d2142b)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-b4f9613994fb0e20)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-be80155361975816)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC1-dc1df50f93a286b5)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC2-3e1a728f5659365c)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC2-642c750b8c7724f5)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC2-67e54a5b9cbecce3)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC2-bf8e751a952799e9)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC3-2c3b0f6e6af11b70)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC3-4dee990427caa08a)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC3-66b9903a6dcaab7d)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC3-b3de670a0b3e9ca8)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC4-671d115ce9a5dc4a)</span></li><li><strong>HIGH:</strong> Restrict enrollment and template control, remove unnecessary subject/EKU flexibility, require approval where appropriate. <span class="muted">(ADS-ESC4-8f8ac5c35a86c7a9)</span></li></ol>
+<footer>Local report · No external assets, scripts or uploads · Configuration indicators require owner review and controlled validation. Production readiness depends on documented public-data and authorized-lab validation.</footer>
+</main></body></html>

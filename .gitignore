@@ -6,7 +6,7 @@ __pycache__/
 .ruff_cache/
 .env
 results/
-reports/
+/reports/
 captures/
 loot/
 *.pcap
@@ -17,3 +17,13 @@ loot/
 *credentials*
 build/
 dist/
+
+# Live authorization, logs and engagement evidence must stay local.
+validation/lab/raw/
+validation/authorized-real-world/raw/
+validation/evidence/private/
+datasets/authorized-lab/sanitized-evidence/*
+!datasets/authorized-lab/sanitized-evidence/README.md
+datasets/authorized-engagement/sanitized-evidence/*
+!datasets/authorized-engagement/sanitized-evidence/README.md
+.venv-linux/
