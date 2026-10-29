@@ -1,0 +1,13 @@
+.git
+.venv
+.env
+results
+reports
+captures
+loot
+__pycache__
+*.key
+*.pfx
+*.ccache
+*.kirbi
+*credentials*

@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "source": "Synthetic isolated lab example; not a real assessment",
+  "users": [
+    {
+      "id": "jdoe",
+      "preauth_required": false,
+      "password_never_expires": true
+    },
+    {
+      "id": "svc_web",
+      "has_spn": true,
+      "rc4_only": true,
+      "manual_service_account": true
+    }
+  ],
+  "groups": [
+    {
+      "id": "Helpdesk"
+    },
+    {
+      "id": "DOMAIN ADMINS"
+    }
+  ],
+  "computers": [
+    {
+      "id": "WS01.CORP.LAB",
+      "smb_signing_required": false,
+      "laps_enabled": false,
+      "nla_required": false,
+      "security_auditing": false,
+      "script_block_logging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "jdoe",
+      "target": "Helpdesk",
+      "relation": "MemberOf"
+    },
+    {
+      "source": "Helpdesk",
+      "target": "DOMAIN ADMINS",
+      "relation": "GenericAll"
+    }
+  ],
+  "templates": [
+    {
+      "id": "LabTemplate",
+      "enrollee_supplies_subject": true,
+      "client_authentication": true,
+      "low_privilege_enrollment": true,
+      "manager_approval": false,
+      "authorized_signatures": 0,
+      "published": true
+    }
+  ],
+  "replication_rights": [
+    {
+      "principal": "svc_backup",
+      "rights": [
+        "DS-Replication-Get-Changes",
+        "DS-Replication-Get-Changes-All"
+      ]
+    }
+  ],
+  "password_policies": [
+    {
+      "id": "corp.lab",
+      "minimum_length": 8,
+      "history_length": 10
+    }
+  ],
+  "applications": [
+    {
+      "id": "lab-app",
+      "overprivileged": true
+    }
+  ],
+  "trusts": [
+    {
+      "id": "legacy.lab",
+      "sid_filtering": false
+    }
+  ],
+  "dns": [
+    {
+      "id": "corp.lab",
+      "insecure_dynamic_updates": true
+    }
+  ]
+}

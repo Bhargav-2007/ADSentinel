@@ -4,7 +4,21 @@
 
 > **Ethical use notice:** ADSentinel is intended only for authorized security testing, education, and defensive research in environments you own or are explicitly permitted to assess. Unauthorized use is illegal and unethical.
 
-## Features
+## Implementation status (0.1.0)
+
+The executable now provides offline evidence analysis, bounded attack-path analysis, local JSON/CSV/Markdown/HTML/terminal reports, authorization gates, and explicit read-only LDAPS and Microsoft Graph inventory collectors. **This is an initial implementation, not the full scanner described in the feature roadmap below.** Protocol probes, binary ACL parsing, native BloodHound exports, full Entra posture collection and intrusive validation are not implemented. See the [capability matrix](docs/modules.md) for exact coverage and limitations.
+
+Run a complete synthetic assessment locally:
+```bash
+python -m pip install -e .
+python -m adsentinel full-audit --input examples/evidence.json --output results/audit.json
+python -m adsentinel report --input results/audit.json --output results/audit.html
+python -m adsentinel attack-path --input examples/evidence.json --from jdoe --to "DOMAIN ADMINS" --find-all
+```
+
+All network collection requires an explicit `--collect ldap` or `--collect graph`; domain/DC flags alone never initiate traffic. Existing output files are not overwritten. [Installation](docs/installation.md), [usage](docs/usage.md), [authorization](docs/authorization.md), [security limitations](docs/security-audit.md), [development](docs/development.md).
+
+## Feature roadmap
 
 - Cross-platform CLI for Linux and Windows
 - Passive-first Active Directory reconnaissance
@@ -32,7 +46,7 @@
 ### Linux
 
 ```bash
-git clone [https://github.com/your-username/adsentinel.git](https://github.com/your-username/adsentinel.git)
+git clone [https://github.com/Bhargav-2007/ADSentinel.git](https://github.com/Bhargav-2007/ADSentinel.git)
 cd adsentinel
 python3 -m venv .venv
 source .venv/bin/activate
@@ -43,7 +57,7 @@ adsentinel --help
 ### Windows PowerShell
 
 ```powershell
-git clone [https://github.com/your-username/adsentinel.git](https://github.com/your-username/adsentinel.git)
+git clone [https://github.com/Bhargav-2007/ADSentinel.git](https://github.com/Bhargav-2007/ADSentinel.git)
 cd adsentinel
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1

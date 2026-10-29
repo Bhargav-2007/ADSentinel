@@ -1,0 +1,26 @@
+target:
+  domain: corp.lab
+  domain_controller: dc01.corp.lab
+  ldap_port: 389
+  ldaps_port: 636
+  entra_tenant: your-lab-tenant
+authentication:
+  username: jdoe@corp.lab
+  password_env: ADS_SENTINEL_PASSWORD
+  graph_token_env: ADS_SENTINEL_GRAPH_TOKEN
+  kerberos: false
+  hashes: false
+scan:
+  mode: passive
+  modules: [recon, kerberos, adcs, delegation, acl, dcsync-check, gpo, laps, gmsa, smb, ldap, ntlm, dns, rdp, winrm, trusts, azure-ad, account-hygiene, password-policy, privileged-access, baseline, detection-coverage]
+output:
+  directory: results
+  formats: [json, markdown, html]
+safety:
+  require_authorization: true
+  allow_credential_extraction: false
+  allow_certificate_requests: false
+  allow_relay_validation: false
+  allow_password_spraying: false
+  max_parallel_tasks: 5
+  timeout_seconds: 30

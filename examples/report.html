@@ -1,0 +1,190 @@
+<!doctype html><html lang='en'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><meta http-equiv='Content-Security-Policy' content="default-src 'none'; style-src 'unsafe-inline'"><title>ADSentinel assessment</title><style>body{font:16px system-ui;max-width:1000px;margin:3rem auto;padding:0 1rem;color:#193046}article{border-left:4px solid #357;padding:1rem;background:#f3f6f9;margin:1rem 0}pre{white-space:pre-wrap;overflow-wrap:anywhere}h1,h2{color:#123}</style><h1>ADSentinel assessment</h1><h2>Executive summary</h2><p>18 findings; {&#x27;CRITICAL&#x27;: 1, &#x27;HIGH&#x27;: 9, &#x27;MEDIUM&#x27;: 8}. No findings does not establish security.</p><h2>Scope and authorization</h2><pre>{
+  &quot;timestamp&quot;: &quot;2026-10-29T10:09:50.212340+00:00&quot;,
+  &quot;scope&quot;: {
+    &quot;domain&quot;: null,
+    &quot;dc&quot;: null,
+    &quot;target&quot;: null,
+    &quot;tenant_label&quot;: null
+  },
+  &quot;authorization&quot;: {
+    &quot;authorize&quot;: false,
+    &quot;ownership_acknowledged&quot;: false,
+    &quot;reference&quot;: &quot;Not supplied&quot;,
+    &quot;mode&quot;: &quot;read-only evidence assessment&quot;
+  }
+}</pre><h2>Coverage and limitations</h2><pre>{
+  &quot;recon&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;bloodhound&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;kerberos&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 3,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 3
+  },
+  &quot;adcs&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;delegation&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;acl&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;dcsync-check&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;attack-path&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;gpo&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;laps&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;gmsa&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;smb&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;ldap&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;ntlm&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;dns&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;rdp&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;winrm&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;trusts&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;azure-ad&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;account-hygiene&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 1,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 1
+  },
+  &quot;password-policy&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 2
+  },
+  &quot;privileged-access&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;baseline&quot;: {
+    &quot;status&quot;: &quot;no applicable evidence&quot;,
+    &quot;evaluated_fields&quot;: 0,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 0
+  },
+  &quot;detection-coverage&quot;: {
+    &quot;status&quot;: &quot;evaluated&quot;,
+    &quot;evaluated_fields&quot;: 2,
+    &quot;limitations&quot;: &quot;Imported indicators are not proof of effective access or exploitability.&quot;,
+    &quot;finding_count&quot;: 2
+  }
+}</pre><h2>Findings</h2><article><h3>CRITICAL ? Replication permission combination reported</h3><p><strong>id:</strong> ADS-DCSYNC</p><p><strong>module:</strong> dcsync-check</p><p><strong>affected_object:</strong> svc_backup</p><p><strong>evidence:</strong> {&#x27;principal&#x27;: &#x27;svc_backup&#x27;, &#x27;rights&#x27;: [&#x27;DS-Replication-Get-Changes&#x27;, &#x27;DS-Replication-Get-Changes-All&#x27;]}</p><p><strong>mitre:</strong> T1003.006</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Verify domain-root scope, group expansion, deny ACEs and filtered-set requirements; restrict replication rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Kerberos preauthentication disabled</h3><p><strong>id:</strong> ADS-001</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> jdoe</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;preauth_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1558.004</p><p><strong>detection:</strong> Review events 4768 and 4738.</p><p><strong>remediation:</strong> Require Kerberos preauthentication after compatibility review.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? RC4-only Kerberos account</h3><p><strong>id:</strong> ADS-003</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;rc4_only&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1558.003</p><p><strong>detection:</strong> Review encryption types in event 4769.</p><p><strong>remediation:</strong> Enable AES and rotate service credentials after compatibility testing.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? SMB signing not required</h3><p><strong>id:</strong> ADS-011</p><p><strong>module:</strong> smb</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;smb_signing_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1557.001</p><p><strong>detection:</strong> Review SMB server audit logs and relay-related logons.</p><p><strong>remediation:</strong> Require SMB signing through a tested policy rollout.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Insecure DNS dynamic updates</h3><p><strong>id:</strong> ADS-017</p><p><strong>module:</strong> dns</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;dns&#x27;, &#x27;field&#x27;: &#x27;insecure_dynamic_updates&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1557</p><p><strong>detection:</strong> Monitor DNS record changes and server audit logs.</p><p><strong>remediation:</strong> Require secure dynamic updates and review DNS ACLs.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? SID filtering disabled on a trust</h3><p><strong>id:</strong> ADS-022</p><p><strong>module:</strong> trusts</p><p><strong>affected_object:</strong> legacy.lab</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;trusts&#x27;, &#x27;field&#x27;: &#x27;sid_filtering&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1134.005</p><p><strong>detection:</strong> Monitor trust changes and SIDHistory modifications.</p><p><strong>remediation:</strong> Review trust type and enforce appropriate SID filtering.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Security auditing disabled</h3><p><strong>id:</strong> ADS-029</p><p><strong>module:</strong> detection-coverage</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;security_auditing&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1562.002</p><p><strong>detection:</strong> Monitor 4719 audit-policy changes and log gaps.</p><p><strong>remediation:</strong> Apply advanced audit policy and validate SIEM forwarding.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Overprivileged application reported</h3><p><strong>id:</strong> ADS-031</p><p><strong>module:</strong> azure-ad</p><p><strong>affected_object:</strong> lab-app</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;applications&#x27;, &#x27;field&#x27;: &#x27;overprivileged&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1098.003</p><p><strong>detection:</strong> Monitor app role assignment and consent audit events.</p><p><strong>remediation:</strong> Review consent grants and remove unnecessary permissions.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? Potential directory control edge</h3><p><strong>id:</strong> ADS-ACL</p><p><strong>module:</strong> acl</p><p><strong>affected_object:</strong> DOMAIN ADMINS</p><p><strong>evidence:</strong> {&#x27;source&#x27;: &#x27;Helpdesk&#x27;, &#x27;target&#x27;: &#x27;DOMAIN ADMINS&#x27;, &#x27;relation&#x27;: &#x27;GenericAll&#x27;}</p><p><strong>mitre:</strong> T1098</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review inheritance, deny ACEs and effective access; remove excessive rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>HIGH ? ESC1 configuration indicators</h3><p><strong>id:</strong> ADS-ESC1</p><p><strong>module:</strong> adcs</p><p><strong>affected_object:</strong> LabTemplate</p><p><strong>evidence:</strong> {&#x27;enrollee_supplies_subject&#x27;: True, &#x27;client_authentication&#x27;: True, &#x27;low_privilege_enrollment&#x27;: True, &#x27;manager_approval&#x27;: False, &#x27;authorized_signatures&#x27;: 0, &#x27;published&#x27;: True}</p><p><strong>mitre:</strong> T1649</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Disable supplied subject names or restrict enrollment; require approval and review CA policy.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Service principal eligible for service-ticket requests</h3><p><strong>id:</strong> ADS-002</p><p><strong>module:</strong> kerberos</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;has_spn&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1558.003</p><p><strong>detection:</strong> Review anomalous 4769 service-ticket requests.</p><p><strong>remediation:</strong> Use gMSAs and long unique service passwords; prefer AES.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? LAPS coverage gap</h3><p><strong>id:</strong> ADS-007</p><p><strong>module:</strong> laps</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;laps_enabled&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1078.003</p><p><strong>detection:</strong> Monitor LAPS operational logs and directory access.</p><p><strong>remediation:</strong> Deploy Windows LAPS and restrict password-read rights.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Unmanaged service account</h3><p><strong>id:</strong> ADS-010</p><p><strong>module:</strong> gmsa</p><p><strong>affected_object:</strong> svc_web</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;manual_service_account&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1078.002</p><p><strong>detection:</strong> Review service logons and service-account changes.</p><p><strong>remediation:</strong> Migrate eligible services to gMSAs.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? RDP NLA not required</h3><p><strong>id:</strong> ADS-019</p><p><strong>module:</strong> rdp</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;nla_required&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1021.001</p><p><strong>detection:</strong> Review 4624 type 10 and TerminalServices logs.</p><p><strong>remediation:</strong> Require NLA and restrict RDP access.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Account password never expires</h3><p><strong>id:</strong> ADS-023</p><p><strong>module:</strong> account-hygiene</p><p><strong>affected_object:</strong> jdoe</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;users&#x27;, &#x27;field&#x27;: &#x27;password_never_expires&#x27;, &#x27;value&#x27;: True}</p><p><strong>mitre:</strong> T1078.002</p><p><strong>detection:</strong> Monitor userAccountControl changes and account use.</p><p><strong>remediation:</strong> Review account purpose and adopt managed service identities.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? PowerShell script-block logging disabled</h3><p><strong>id:</strong> ADS-028</p><p><strong>module:</strong> detection-coverage</p><p><strong>affected_object:</strong> WS01.CORP.LAB</p><p><strong>evidence:</strong> {&#x27;collection&#x27;: &#x27;computers&#x27;, &#x27;field&#x27;: &#x27;script_block_logging&#x27;, &#x27;value&#x27;: False}</p><p><strong>mitre:</strong> T1059.001</p><p><strong>detection:</strong> Verify receipt of PowerShell event 4104.</p><p><strong>remediation:</strong> Enable script-block logging and forward events securely.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Password policy review needed: history_length</h3><p><strong>id:</strong> ADS-POLICY-history_length</p><p><strong>module:</strong> password-policy</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;history_length&#x27;: 10}</p><p><strong>mitre:</strong> T1110</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review password policy against organizational requirements; favor long passwords and MFA.</p><p><strong>confidence:</strong> configuration indicator</p></article><article><h3>MEDIUM ? Password policy review needed: minimum_length</h3><p><strong>id:</strong> ADS-POLICY-minimum_length</p><p><strong>module:</strong> password-policy</p><p><strong>affected_object:</strong> corp.lab</p><p><strong>evidence:</strong> {&#x27;minimum_length&#x27;: 8}</p><p><strong>mitre:</strong> T1110</p><p><strong>detection:</strong> Monitor directory changes (5136) and scoped object access (4662).</p><p><strong>remediation:</strong> Review password policy against organizational requirements; favor long passwords and MFA.</p><p><strong>confidence:</strong> configuration indicator</p></article><h2>Attack-path references</h2><pre>{
+  &quot;source&quot;: &quot;jdoe&quot;,
+  &quot;target&quot;: &quot;DOMAIN ADMINS&quot;,
+  &quot;paths&quot;: [
+    {
+      &quot;edges&quot;: [
+        {
+          &quot;source&quot;: &quot;jdoe&quot;,
+          &quot;target&quot;: &quot;Helpdesk&quot;,
+          &quot;relation&quot;: &quot;MemberOf&quot;
+        },
+        {
+          &quot;source&quot;: &quot;Helpdesk&quot;,
+          &quot;target&quot;: &quot;DOMAIN ADMINS&quot;,
+          &quot;relation&quot;: &quot;GenericAll&quot;
+        }
+      ],
+      &quot;risk_score&quot;: 40,
+      &quot;remediation&quot;: [
+        &quot;Review and restrict MemberOf from jdoe to Helpdesk&quot;,
+        &quot;Review and restrict GenericAll from Helpdesk to DOMAIN ADMINS&quot;
+      ]
+    }
+  ],
+  &quot;chokepoints&quot;: {
+    &quot;Helpdesk&quot;: 1
+  },
+  &quot;path_limit&quot;: 1000,
+  &quot;truncated&quot;: false,
+  &quot;interpretation&quot;: &quot;Candidate paths from supplied relationships; effective access requires review.&quot;
+}</pre><h2>Prioritized remediation roadmap</h2><ol><li>CRITICAL: Verify domain-root scope, group expansion, deny ACEs and filtered-set requirements; restrict replication rights.</li><li>HIGH: Require Kerberos preauthentication after compatibility review.</li><li>HIGH: Enable AES and rotate service credentials after compatibility testing.</li><li>HIGH: Require SMB signing through a tested policy rollout.</li><li>HIGH: Require secure dynamic updates and review DNS ACLs.</li><li>HIGH: Review trust type and enforce appropriate SID filtering.</li><li>HIGH: Apply advanced audit policy and validate SIEM forwarding.</li><li>HIGH: Review consent grants and remove unnecessary permissions.</li><li>HIGH: Review inheritance, deny ACEs and effective access; remove excessive rights.</li><li>HIGH: Disable supplied subject names or restrict enrollment; require approval and review CA policy.</li><li>MEDIUM: Use gMSAs and long unique service passwords; prefer AES.</li><li>MEDIUM: Deploy Windows LAPS and restrict password-read rights.</li><li>MEDIUM: Migrate eligible services to gMSAs.</li><li>MEDIUM: Require NLA and restrict RDP access.</li><li>MEDIUM: Review account purpose and adopt managed service identities.</li><li>MEDIUM: Enable script-block logging and forward events securely.</li><li>MEDIUM: Review password policy against organizational requirements; favor long passwords and MFA.</li><li>MEDIUM: Review password policy against organizational requirements; favor long passwords and MFA.</li></ol></html>
